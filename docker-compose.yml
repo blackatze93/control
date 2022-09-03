@@ -2,9 +2,11 @@ version: "3"
 
 services:
   db:
-    image: postgres
+    image: postgis/postgis
     volumes:
       - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
