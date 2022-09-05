@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.gis.db import models
+from places.fields import PlacesField
 
 
 # Company model
@@ -11,9 +11,7 @@ class Company(models.Model):
     phone = models.CharField(max_length=10)
     email = models.EmailField(max_length=100)
     website = models.URLField(max_length=100)
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=2)
-    country = models.CharField(max_length=50)
+    location = PlacesField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -27,9 +25,7 @@ class User(models.Model):
     email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=10)
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True)
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=2)
-    country = models.CharField(max_length=50)
+    location = PlacesField(null=True, blank=True)
 
     def __str__(self):
         return str(self.name) + ' ' + str(self.last_name)
@@ -41,15 +37,15 @@ class Office(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
-    geolocation = models.PointField(srid=4326, null=True, blank=True)
+    location = PlacesField(null=True, blank=True, )
     enabled = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
 
 
-# Office hours model
-class OfficeHours(models.Model):
+# Office hour model
+class OfficeHour(models.Model):
     offices = models.ManyToManyField(Office)
     day = models.CharField(max_length=50)
     start_time = models.TimeField()

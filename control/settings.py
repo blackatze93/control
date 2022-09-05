@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'places',
     'directory',
 ]
 
@@ -76,7 +77,7 @@ WSGI_APPLICATION = 'control.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('POSTGRES_NAME'),
         'USER': os.environ.get('POSTGRES_USER'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
@@ -128,3 +129,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+PLACES_MAPS_API_KEY = 'AIzaSyCRQFei21_9MtZjEJdx4eHO-6aEkWXkKVk'
+PLACES_MAP_WIDGET_HEIGHT = 480
+PLACES_MAP_OPTIONS = '{"center": { "lat": 4.624335, "lng": -74.063644 }, "zoom": 6}'
+PLACES_MARKER_OPTIONS = '{"draggable": true}'
