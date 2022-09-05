@@ -1,4 +1,5 @@
 import phonenumbers
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 from phonenumbers.phonenumberutil import region_code_for_number
@@ -25,9 +26,7 @@ class Company(models.Model):
 
 # User model
 class User(models.Model):
-    name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True)
     phone = models.CharField(max_length=16, help_text='Phone number must be in international format, e.g. +571234567890')
     location = PlacesField()
@@ -49,7 +48,7 @@ class User(models.Model):
 
 
     def __str__(self):
-        return str(self.name) + ' ' + str(self.last_name)
+        return str(self.user.first_name) + ' ' + str(self.user.last_name)
 
 
 # Office model

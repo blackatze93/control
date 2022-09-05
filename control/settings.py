@@ -53,10 +53,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'control.urls'
 
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates') if DEBUG else env.str('TEMPLATE_DIR')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,6 +132,9 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = '/admin/'
 
 PLACES_MAPS_API_KEY = 'AIzaSyCRQFei21_9MtZjEJdx4eHO-6aEkWXkKVk'
 PLACES_MAP_WIDGET_HEIGHT = 480
