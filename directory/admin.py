@@ -11,8 +11,8 @@ gmaps = googlemaps.Client(key='AIzaSyCRQFei21_9MtZjEJdx4eHO-6aEkWXkKVk')
 
 
 class OfficeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'address', 'email', 'location', 'enabled')
-    search_fields = ('name', 'address', 'email')
+    list_display = ('name', 'email', 'location', 'enabled')
+    search_fields = ('name', 'email', 'location')
 
     def get_queryset(self, request):
         qs = super(OfficeAdmin, self).get_queryset(request)
@@ -37,8 +37,8 @@ class OfficeAdmin(admin.ModelAdmin):
         return qs.filter(company=1)
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('name', 'last_name', 'address', 'email', 'phone', 'company', 'location')
-    search_fields = ('name', 'last_name', 'address', 'email', 'phone', 'company', 'location')
+    list_display = ('name', 'last_name', 'email', 'phone', 'company', 'location')
+    search_fields = ('name', 'last_name', 'email', 'phone', 'company', 'location')
 
 
 
